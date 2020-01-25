@@ -1,4 +1,4 @@
-package com.ofvictor.acelera_java.aula05.exception;
+package com.ofvictor.acelera_java.aula05.business;
 
 import java.util.HashMap;
 import java.util.Map;
