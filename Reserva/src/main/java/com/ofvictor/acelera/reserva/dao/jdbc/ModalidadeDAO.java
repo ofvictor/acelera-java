@@ -34,7 +34,7 @@ public class ModalidadeDAO implements DAO<Modalidade> {
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, domain.getNome());
-            ps.setInt(2, domain.getIdModalidade());
+            ps.setInt(2, domain.getIdModalidade().intValue());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class ModalidadeDAO implements DAO<Modalidade> {
         
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setInt(1, domain.getIdModalidade());
+            ps.setInt(1, domain.getIdModalidade().intValue());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class ModalidadeDAO implements DAO<Modalidade> {
             
             while (rs.next()) {
                 Modalidade modalidade = new Modalidade();
-                modalidade.setIdModalidade(rs.getInt("id_modalidade"));
+                modalidade.setIdModalidade(Long.valueOf(Integer.toString(rs.getInt("id_modalidade"))));
                 modalidade.setNome(rs.getString("nome"));
                 listaModalidades.add(modalidade);
             }

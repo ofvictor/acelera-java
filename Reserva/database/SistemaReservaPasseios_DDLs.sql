@@ -1,4 +1,8 @@
-USE reserva;
+-- show databases;
+
+-- create database reserva;
+
+-- USE reserva;
 
 -- MODALIDADE
 CREATE TABLE `modalidade` (

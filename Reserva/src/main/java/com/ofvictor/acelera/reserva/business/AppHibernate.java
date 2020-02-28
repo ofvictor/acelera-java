@@ -12,7 +12,7 @@ public class AppHibernate {
         Modalidade modalidade = new Modalidade();
         modalidade.setNome("Bike Trekking");
         modalidadeDAO.salvar(modalidade);
-        modalidadeDAO.listarTodos().forEach(System.out::println);
+//        modalidadeDAO.listarTodos().forEach(System.out::println);
 	}
 	
 /*	public void insereEListaTiposPasseio() {

@@ -9,15 +9,18 @@ import com.ofvictor.acelera.reserva.dao.DAO;
 import com.ofvictor.acelera.reserva.pojo.Modalidade;
 
 public class ModalidadeDAO implements DAO<Modalidade> {
+	
 	private EntityManagerFactory entityManagerFactory = null;
 	private EntityManager entityManager = null;
 	
 	public void begin() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("reserva-pu");
 		this.entityManager = this.entityManagerFactory.createEntityManager();
+		this.entityManager.getTransaction().begin();
 	}
 	
 	public void close() {
+		if (this.entityManager.getTransaction().isActive()) this.entityManager.getTransaction().commit();
 		if (this.entityManager != null) this.entityManager.close();
 		if (this.entityManagerFactory != null) this.entityManagerFactory.close();
 	}
@@ -46,7 +49,7 @@ public class ModalidadeDAO implements DAO<Modalidade> {
 	@Override
 	public List<Modalidade> listarTodos() {
 		this.begin();
-		Query modalidade = (Query) this.entityManager.createQuery("SELECT * FROM modalidade");
+		Query modalidade = (Query) this.entityManager.createQuery("SELECT id_modalidade, nome FROM modalidade");
 		List<Modalidade> modalidades = ((javax.persistence.Query) modalidade).getResultList();
 		this.close();
 		return modalidades;
