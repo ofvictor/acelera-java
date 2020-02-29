@@ -1,35 +1,36 @@
 package com.acelera.tcc.group03.pojo;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "bank")
-public class Bank implements BaseEntity {
+@Table (name = "agency")
+public class Agency implements BaseEntity {
 	@Id
 	@GeneratedValue (generator = "increment")
 	@Column (name = "id")
 	private Long id;
 	
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
+	private Bank bank;
+	
 	@Column (name = "name")
 	private String name;
 	
 	@Column (name = "number")
-	private String number;	
+	private String number;
 	
-    @OneToMany(mappedBy="bank_id")
-    private List<Agency> agencies;
-    
-    public Long getId() {
+	@Override
+	public Long getId() {
 		return this.id;
 	}
-    
+	
 	public String getName() {
 		return this.name;
 	}
@@ -46,16 +47,16 @@ public class Bank implements BaseEntity {
 		this.number = number;
 	}
 	
-	public List<Agency> getAgencies() {
-		return this.agencies;
+	public Bank getBank() {
+		return this.bank;
 	}
 	
-	public void setAgencies(List<Agency> agencies) {
-		this.agencies = agencies;
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 	
 	@Override
     public String toString() {
-        return "Bank ID: [" + this.getId() + "] Name: [" + this.getName() + "] Number: [" + this.getNumber() + "]";
+        return "Agency ID: [" + this.getId() + "] Name: [" + this.getName() + "] Type: [" + this.getNumber() + "]";
     }
 }

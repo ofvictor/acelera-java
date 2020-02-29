@@ -5,6 +5,10 @@
              version="2.2">
     <persistence-unit name="transaction-system-pu">
         <class>com.acelera.tcc.group03.pojo.Bank</class>
+        <class>com.acelera.tcc.group03.pojo.Agency</class>
+        <class>com.acelera.tcc.group03.pojo.TransactionChannel</class>
+        <class>com.acelera.tcc.group03.pojo.TransactionType</class>
+        <class>com.acelera.tcc.group03.pojo.Customer</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/transaction_system?serverTimezone=UTC" />
             <property name="javax.persistence.jdbc.user" value="root" />

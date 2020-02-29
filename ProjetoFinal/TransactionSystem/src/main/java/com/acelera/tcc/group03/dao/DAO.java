@@ -64,9 +64,9 @@ public abstract class DAO<T extends BaseEntity> {
 		return resultList;
 	}
 	
-	public T findById(T domain) {
+	public T findById(Long id) {
 		this.begin();
-		T value = (T) this.em.find(this.getClassName(), domain.getId());
+		T value = (T) this.em.find(this.getClassName(), id);
 		this.close();
 		
 		return value;
