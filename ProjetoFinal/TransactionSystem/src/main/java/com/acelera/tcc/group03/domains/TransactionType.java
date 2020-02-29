@@ -1,4 +1,4 @@
-package com.acelera.tcc.group03.pojo;
+package com.acelera.tcc.group03.domains;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

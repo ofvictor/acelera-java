@@ -1,4 +1,4 @@
-package com.acelera.tcc.group03.dao;
+package com.acelera.tcc.group03.repositories;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.acelera.tcc.group03.pojo.BaseEntity;
+import com.acelera.tcc.group03.domains.BaseEntity;
 
 public abstract class DAO<T extends BaseEntity> {
 	private EntityManagerFactory emf = null;

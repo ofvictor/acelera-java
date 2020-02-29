@@ -1,6 +1,6 @@
-package com.acelera.tcc.group03.dao;
+package com.acelera.tcc.group03.repositories;
 
-import com.acelera.tcc.group03.pojo.TransactionType;
+import com.acelera.tcc.group03.domains.TransactionType;
 
 public class TransactionTypeDAO extends DAO<TransactionType> {
 	@Override

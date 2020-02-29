@@ -2,19 +2,19 @@ package com.acelera.tcc.group03.business;
 
 import java.util.List;
 
-import com.acelera.tcc.group03.dao.AgencyDAO;
-import com.acelera.tcc.group03.dao.BankDAO;
-import com.acelera.tcc.group03.dao.CustomerDAO;
-import com.acelera.tcc.group03.dao.TransactionChannelDAO;
-import com.acelera.tcc.group03.dao.TransactionTypeDAO;
-import com.acelera.tcc.group03.dataload.AgencyDataLoad;
-import com.acelera.tcc.group03.dataload.TransactionTypeDataLoad;
-import com.acelera.tcc.group03.pojo.Agency;
-import com.acelera.tcc.group03.pojo.Bank;
-import com.acelera.tcc.group03.pojo.Customer;
-import com.acelera.tcc.group03.pojo.TransactionChannel;
-import com.acelera.tcc.group03.pojo.TransactionType;
-import com.acelera.tcc.group03.pojo.TransactionTypeAction;
+import com.acelera.tcc.group03.dataload.CustomerAccountDataLoad;
+import com.acelera.tcc.group03.domains.Agency;
+import com.acelera.tcc.group03.domains.Bank;
+import com.acelera.tcc.group03.domains.Customer;
+import com.acelera.tcc.group03.domains.CustomerAccount;
+import com.acelera.tcc.group03.domains.TransactionChannel;
+import com.acelera.tcc.group03.domains.TransactionType;
+import com.acelera.tcc.group03.repositories.AgencyDAO;
+import com.acelera.tcc.group03.repositories.BankDAO;
+import com.acelera.tcc.group03.repositories.CustomerAccountDAO;
+import com.acelera.tcc.group03.repositories.CustomerDAO;
+import com.acelera.tcc.group03.repositories.TransactionChannelDAO;
+import com.acelera.tcc.group03.repositories.TransactionTypeDAO;
 
 public class TransactionSystemApp {
 	public static void main(String[] args) {
@@ -71,6 +71,7 @@ public class TransactionSystemApp {
 		listTransactionTypes.forEach(transactionType -> System.out.println(transactionType.toString()));
 		
 		AgencyDAO agencyDAO = new AgencyDAO();
+		/*
 		for (int i = 0 ; i < AgencyDataLoad.getAgenciesData().length; i++) {
 			Agency agency = new Agency();
 			Bank bankOfAgency = bankDAO.findById(new Long(AgencyDataLoad.getAgenciesData()[i][0]));
@@ -79,8 +80,27 @@ public class TransactionSystemApp {
 			agency.setNumber(AgencyDataLoad.getAgenciesData()[i][2]);
 			agencyDAO.create(agency);
 		}
+		*/
 		
 		List<Agency> listAgencies = agencyDAO.readAll();
-		listAgencies.forEach(agency -> System.out.println(agency.toString()));	
+		listAgencies.forEach(agency -> System.out.println(agency.toString()));
+		
+		CustomerAccountDAO customerAccountDAO = new CustomerAccountDAO();
+		
+		for (int i = 0 ; i < CustomerAccountDataLoad.getCustomerAccountsData().length; i++) {
+			CustomerAccount customerAccount = new CustomerAccount();
+			
+			Customer customerOfAccount = customerDAO.findById(new Long(CustomerAccountDataLoad.getCustomerAccountsData()[i][0]));
+			customerAccount.setCustomer(customerOfAccount);
+			
+			Agency agencyOfAccount = agencyDAO.findById(new Long(CustomerAccountDataLoad.getCustomerAccountsData()[i][1]));
+			customerAccount.setAgency(agencyOfAccount);
+			
+			customerAccount.setAccountBalance(new Double(CustomerAccountDataLoad.getCustomerAccountsData()[i][2]));
+			customerAccountDAO.create(customerAccount);
+		}
+		
+		List<CustomerAccount> listCustomerAccounts = customerAccountDAO.readAll();
+		listCustomerAccounts.forEach(customerAccount -> System.out.println(customerAccount.toString()));	
 	}
 }

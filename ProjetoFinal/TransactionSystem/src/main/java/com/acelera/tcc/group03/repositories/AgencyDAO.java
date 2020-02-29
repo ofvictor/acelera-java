@@ -1,6 +1,6 @@
-package com.acelera.tcc.group03.dao;
+package com.acelera.tcc.group03.repositories;
 
-import com.acelera.tcc.group03.pojo.Agency;
+import com.acelera.tcc.group03.domains.Agency;
 
 public class AgencyDAO extends DAO<Agency> {
 	@Override

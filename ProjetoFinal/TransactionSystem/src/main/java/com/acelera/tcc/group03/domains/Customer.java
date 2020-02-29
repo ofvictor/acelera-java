@@ -1,9 +1,12 @@
-package com.acelera.tcc.group03.pojo;
+package com.acelera.tcc.group03.domains;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +16,9 @@ public class Customer implements BaseEntity {
 	@GeneratedValue (generator = "increment")
 	@Column (name = "id")
 	private Long id;
+	
+    @OneToMany(mappedBy="customer")
+    private List<CustomerAccount> customerAccounts;
 	
 	@Column (name = "name")
 	private String name;

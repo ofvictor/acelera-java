@@ -1,3 +1,5 @@
+-- drop database transaction_system;
+
 -- show databases;
 
 -- create database transaction_system;

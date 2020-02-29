@@ -1,6 +1,6 @@
-package com.acelera.tcc.group03.dao;
+package com.acelera.tcc.group03.repositories;
 
-import com.acelera.tcc.group03.pojo.TransactionChannel;
+import com.acelera.tcc.group03.domains.TransactionChannel;
 
 public class TransactionChannelDAO extends DAO<TransactionChannel> {
 	@Override
