@@ -1,0 +1,10 @@
+bin
+build
+
+.classpath
+.gradle
+.project
+.settings
+*.war
+
+!gradle/wrapper/gradle-wrapper.jar
