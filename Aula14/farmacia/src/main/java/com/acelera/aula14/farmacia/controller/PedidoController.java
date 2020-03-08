@@ -12,31 +12,31 @@ import java.util.List;
 @RequestMapping("/pedido")
 public class PedidoController {
     private PedidoService service;
-
+    
     public PedidoController(PedidoService service) {
         this.service = service;
     }
-
+    
     @GetMapping
     public ResponseEntity<List<Pedido>> getAll() {
         return ResponseEntity.ok(this.service.getAll());
     }
-
-    @GetMapping ("/{id}")
+    
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<Pedido> getById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.service.getById(id));
+    	return ResponseEntity.ok(this.service.getById(id));
     }
-
+    
     @PostMapping
     public String create(@RequestBody Pedido pedido) {
         return this.service.create(pedido).toString();
     }
-
+    
     @PutMapping
     public String update(@RequestBody Pedido pedido) {
         return this.service.update(pedido).toString();
     }
-
+    
     @DeleteMapping ("/{id}")
     public String delete(@PathVariable("id") Long id) {
         this.service.delete(id);
