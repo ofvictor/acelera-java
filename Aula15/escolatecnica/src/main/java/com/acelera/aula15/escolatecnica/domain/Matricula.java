@@ -10,29 +10,11 @@ public class Matricula {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "id_turma")
-    private Long idTurma;
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id")
+    private Turma turma;
 
-    @Column(name = "id_aluno")
-    private Long idAluno;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getIdTurma() {
-        return idTurma;
-    }
-
-    public void setIdTurma(Long idTurma) {
-        this.idTurma = idTurma;
-    }
-
-    public Long getIdAluno() {
-        return idAluno;
-    }
-
-    public void setIdAluno(Long idAluno) {
-        this.idAluno = idAluno;
-    }
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id")
+    private Aluno aluno;
 }

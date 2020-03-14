@@ -1,6 +1,7 @@
 package com.acelera.aula15.escolatecnica.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "curso")
@@ -10,40 +11,43 @@ public class Curso {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = "nome")
+    private String nome;
+
     @Column (name = "descricao")
-    private String descricaoCurso;
+    private String descricao;
 
     @Column (name = "requisitos")
-    private String requisitosCurso;
+    private String requisitos;
 
     @Column (name = "modalidade")
-    private String modalidadeCurso;
+    private ModalidadeEnum modalidade;
 
-    public Long getId() {
-        return id;
+    @OneToMany(mappedBy = "curso")
+    private List<Turma> turmas;
+
+    public Curso(String nome, String descricao, String requisitos, ModalidadeEnum modalidade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.requisitos = requisitos;
+        this.modalidade = modalidade;
     }
 
-    public String getDescricaoCurso() {
-        return descricaoCurso;
-    }
+    public Long getId() { return this.id; }
 
-    public void setDescricaoCurso(String descricaoCurso) {
-        this.descricaoCurso = descricaoCurso;
-    }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getRequisitosCurso() {
-        return requisitosCurso;
-    }
+    public String getNome() { return this.nome; }
 
-    public void setRequisitosCurso(String requisitosCurso) {
-        this.requisitosCurso = requisitosCurso;
-    }
+    public void setModalidade(ModalidadeEnum modalidade) { this.modalidade = modalidade; }
 
-    public String getModalidadeCurso() {
-        return modalidadeCurso;
-    }
+    public ModalidadeEnum getModalidade() { return this.modalidade; }
 
-    public void setModalidadeCurso(String modalidadeCurso) {
-        this.modalidadeCurso = modalidadeCurso;
-    }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getDescricao() { return this.descricao; }
+
+    public void setRequisitos(String requisitos) { this.requisitos = requisitos; }
+
+    public String getRequisitos() { return this.requisitos; }
 }

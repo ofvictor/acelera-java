@@ -19,4 +19,8 @@ public class CursoService {
 
         return cursoRepository.save(curso);
     }
+
+    public Curso findById(Long idCurso) {
+        return null;
+    }
 }

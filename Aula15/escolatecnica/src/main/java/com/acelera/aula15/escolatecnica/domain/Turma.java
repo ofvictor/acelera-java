@@ -1,6 +1,8 @@
 package com.acelera.aula15.escolatecnica.domain;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "turma")
@@ -10,40 +12,50 @@ public class Turma {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column (name = "id_curso")
-    private Long idCurso;
-
     @Column (name = "data_ini")
-    private String dtIniTurma;
+    private String dataIni;
 
     @Column (name = "data_fim")
-    private String dtFimTurma;
+    private String dataFim;
 
-    public Long getId() {
-        return id;
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id")
+    private Curso curso;
+
+    @OneToMany(mappedBy = "turma")
+    private List<Matricula> matriculas;
+
+    public Turma(String dataIni, String dataFim, Curso curso) {
+        this.dataIni = dataIni;
+        this.dataFim = dataFim;
+        this.curso = curso;
     }
 
-    public Long getIdCurso() {
-        return idCurso;
+    public Long getId() { return id; }
+
+    public void setDataIni(String dataIni) { this.dataIni = dataIni; }
+
+    public String getDataIni() { return dataIni; }
+
+    public void setDataFim(String dataFim) { this.dataFim = dataFim; }
+
+    public String getDataFim() { return this.dataFim; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if ((o == null) || (getClass() != o.getClass())) return false;
+
+        Turma turma = (Turma) o;
+        return Objects.equals(this.id, turma.id) &&
+                Objects.equals(this.dataIni, turma.dataIni) &&
+                Objects.equals(this.dataFim, turma.dataFim) &&
+                Objects.equals(this.curso, turma.curso) &&
+                Objects.equals(this.matriculas, turma.matriculas);
     }
 
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
-    }
-
-    public String getDtIniTurma() {
-        return dtIniTurma;
-    }
-
-    public void setDtIniTurma(String dtIniTurma) {
-        this.dtIniTurma = dtIniTurma;
-    }
-
-    public String getDtFimTurma() {
-        return dtFimTurma;
-    }
-
-    public void setDtFimTurma(String dtFimTurma) {
-        this.dtFimTurma = dtFimTurma;
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.dataIni, this.dataFim, this.curso, this.matriculas);
     }
 }

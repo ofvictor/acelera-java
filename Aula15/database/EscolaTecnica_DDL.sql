@@ -1,37 +1,52 @@
--- drop database farmacia;
+-- drop database escola_tecnica;
 
 -- show databases;
 
--- create database farmacia;
+-- create database escola_tecnica;
 
--- use farmacia;
+-- use escola_tecnica;
 
--- show tables;
+show tables;
 
--- PEDIDO
-CREATE TABLE pedido (
-  id                       int(12)      NOT NULL AUTO_INCREMENT,
-  data                     varchar(10)  NOT NULL,
-  origem                   varchar(20)  NOT NULL,
+-- CURSO
+CREATE TABLE curso (
+  id                       int          NOT NULL AUTO_INCREMENT,
+  nome                     varchar(50)  NOT NULL,
+  descricao                varchar(100) NOT NULL,
+  requisitos               varchar(100) NOT NULL,
+  modalidade               char(01)     NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- PRODUTO
-CREATE TABLE produto (
-  id                       int(12)      NOT NULL AUTO_INCREMENT,
-  nome                     varchar(10)  NOT NULL,
+-- ALUNO
+CREATE TABLE aluno (
+  id                       int          NOT NULL AUTO_INCREMENT,
+  nome                     varchar(100) NOT NULL,
+  cpf                      char(11)     NOT NULL,
+  data_nascimento          char(08)     NOT NULL,
+  telefone                 varchar(12)  NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ORDEM DE COMPRA
-CREATE TABLE ordem_compra (
-  id                       int(12)      NOT NULL AUTO_INCREMENT,
-  id_pedido                int(12)      NOT NULL,
-  id_produto               int(12)      NOT NULL,
-  quantidade               int(06)      NOT NULL,
+-- TURMA
+CREATE TABLE turma (
+  id                       int          NOT NULL AUTO_INCREMENT,
+  id_curso                 int          NOT NULL,
+  data_ini                 char(08)     NOT NULL,
+  data_fim                 char(08)     NOT NULL,
   PRIMARY KEY (id),
-  KEY FK_PEDIDO_IDX (id_pedido),
-  CONSTRAINT FK_PEDIDO FOREIGN KEY (id_pedido) REFERENCES pedido (id),
-  KEY FK_PRODUTO_IDX (id_produto),
-  CONSTRAINT FK_PRODUTO FOREIGN KEY (id_produto) REFERENCES produto (id)
+  KEY FK_CURSO_IDX (id_curso),
+  CONSTRAINT FK_CURSO FOREIGN KEY (id_curso) REFERENCES curso (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- MATRICULA
+CREATE TABLE matricula (
+  id                       int          NOT NULL AUTO_INCREMENT,
+  id_turma                 int          NOT NULL,
+  id_aluno                 int          NOT NULL,
+  PRIMARY KEY (id),
+  KEY FK_TURMA_IDX (id_turma),
+  CONSTRAINT FK_TURMA FOREIGN KEY (id_turma) REFERENCES turma (id),
+  KEY FK_ALUNO_IDX (id_aluno),
+  CONSTRAINT FK_ALUNO FOREIGN KEY (id_aluno) REFERENCES aluno (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
