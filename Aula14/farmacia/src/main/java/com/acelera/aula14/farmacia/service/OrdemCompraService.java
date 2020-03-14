@@ -15,23 +15,13 @@ public class OrdemCompraService {
         this.repository = repository;
     }
 
-    public List<OrdemCompra> getAll() {
-        return this.repository.findAll();
-    }
+    public List<OrdemCompra> getAll() { return this.repository.findAll(); }
 
-    public OrdemCompra getById(Long id) {
-        return this.repository.getOne(id);
-    }
+    public OrdemCompra getById(Long id) { return this.repository.getOne(id); }
 
-    public OrdemCompra create(OrdemCompra ordemCompra) {
-        return this.repository.save(ordemCompra);
-    }
+    public OrdemCompra create(OrdemCompra ordemCompra) { return this.repository.save(ordemCompra); }
 
-    public OrdemCompra update(OrdemCompra ordemCompra) {
-        return this.repository.save(ordemCompra);
-    }
+    public OrdemCompra update(OrdemCompra ordemCompra) { return this.repository.save(ordemCompra); }
 
-    public void delete(Long id) {
-        this.repository.deleteById(id);
-    }
+    public void delete(Long id) { this.repository.deleteById(id); }
 }

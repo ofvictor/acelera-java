@@ -10,24 +10,18 @@ import java.util.List;
 @Service
 public class PedidoService {
     private PedidoRepository repository;
-
+    
     public PedidoService(PedidoRepository repository) {
         this.repository = repository;
     }
-
+    
     public List<Pedido> getAll() { return this.repository.findAll(); }
-
-    public Pedido getById(Long id) {
-        return this.repository.getOne(id);
-    }
-
+    
+    public Pedido getById(Long id) { return this.repository.getOne(id); }
+    
     public Pedido create(Pedido pedido) { return this.repository.save(pedido); }
-
-    public Pedido update(Pedido pedido) {
-        return this.repository.save(pedido);
-    }
-
-    public void delete(Long id) {
-        this.repository.deleteById(id);
-    }
+    
+    public Pedido update(Pedido pedido) { return this.repository.save(pedido); }
+    
+    public void delete(Long id) { this.repository.deleteById(id); }
 }

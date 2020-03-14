@@ -12,26 +12,16 @@ public class ProdutoService {
     private ProdutoRepository repository;
 
     public ProdutoService(ProdutoRepository repository) {
-        this.repository = repository;
+    	this.repository = repository;
     }
 
-    public List<Produto> getAll() {
-        return this.repository.findAll();
-    }
+    public List<Produto> getAll() { return this.repository.findAll(); }
 
-    public Produto getById(Long id) {
-        return this.repository.getOne(id);
-    }
+    public Produto getById(Long id) { return this.repository.getOne(id); }
 
-    public Produto create(Produto produto) {
-        return this.repository.save(produto);
-    }
+    public Produto create(Produto produto) { return this.repository.save(produto); }
 
-    public Produto update(Produto produto) {
-        return this.repository.save(produto);
-    }
+    public Produto update(Produto produto) { return this.repository.save(produto); }
 
-    public void delete(Long id) {
-        this.repository.deleteById(id);
-    }
+    public void delete(Long id) { this.repository.deleteById(id); }
 }
