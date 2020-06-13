@@ -1,0 +1,10 @@
+Sala dupla: ttps://meet.google.com/znj-jsas-jke
+
+https://github.com/jsouzajava/demo-jwt
+https://github.com/jsouzajava/demo-oauth2
+
+GET http://localhost:8080/quartos-para-limpeza
+POST http://localhost:8080/login
+POST http://localhost:8080/quartos-para-limpeza/4/limpo
+
+Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjkyMDMxOH0.GUOBIXl9dLzZn11vRmRU-rEwgrzxdoUhNCqNrJGW7MbdVDtGy0K-olGZLeLsqLG15ITgFexqbhtc_0thk02Mtw

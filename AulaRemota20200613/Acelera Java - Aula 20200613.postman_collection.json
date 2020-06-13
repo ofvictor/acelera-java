@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "0c42d3eb-4717-4c09-a5a9-154bd64bafab",
+		"name": "Acelera Java - Aula 20200613",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Quartos Para Limpeza",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quartos-para-limpeza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quartos-para-limpeza"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Atualiza para Limpo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjkyMDMxOH0.GUOBIXl9dLzZn11vRmRU-rEwgrzxdoUhNCqNrJGW7MbdVDtGy0K-olGZLeLsqLG15ITgFexqbhtc_0thk02Mtw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/quartos-para-limpeza/4/limpo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quartos-para-limpeza",
+						"4",
+						"limpo"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
