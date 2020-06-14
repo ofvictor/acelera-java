@@ -1,7 +1,10 @@
-Sala dupla: ttps://meet.google.com/znj-jsas-jke
+Sala da dupla Fábio/Joelma: ttps://meet.google.com/znj-jsas-jke
 
+Projetos-base:
 https://github.com/jsouzajava/demo-jwt
 https://github.com/jsouzajava/demo-oauth2
+
+Como invocar o MySQL por linha de comando: 'sudo mysql -p'
 
 GET http://localhost:8080/quartos-para-limpeza
 POST http://localhost:8080/login
