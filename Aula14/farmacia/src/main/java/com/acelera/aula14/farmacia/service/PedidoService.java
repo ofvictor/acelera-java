@@ -1,11 +1,12 @@
 package com.acelera.aula14.farmacia.service;
 
-import com.acelera.aula14.farmacia.model.Pedido;
-import com.acelera.aula14.farmacia.repository.PedidoRepository;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.acelera.aula14.farmacia.model.Pedido;
+import com.acelera.aula14.farmacia.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
@@ -17,7 +18,7 @@ public class PedidoService {
     
     public List<Pedido> getAll() { return this.repository.findAll(); }
     
-    public Pedido getById(Long id) { return this.repository.getOne(id); }
+    public Optional<Pedido> getById(Long id) { return repository.findById(id); }
     
     public Pedido create(Pedido pedido) { return this.repository.save(pedido); }
     
