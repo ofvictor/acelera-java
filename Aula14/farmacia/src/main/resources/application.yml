@@ -9,7 +9,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/farmacia?createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql-server:3306/farmacia?createDatabaseIfNotExist=true
     username: root
     password: secretapacas
     driverClassName: com.mysql.cj.jdbc.Driver

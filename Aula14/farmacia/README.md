@@ -30,10 +30,10 @@ sudo systemctl start mysql
 
 
 -- Docker tests and commands
-sudo docker run -d -p 3306:3306 --name mysql-farmacia -e MYSQL_ROOT_PASSWORD=secretapacas -e MYSQL_USER=farmacia mysql:latest
+docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=secretapacas -d mysql:latest
+docker exec -it mysql-server bash
 
-docker container ls
-
-sudo docker exec -it <CONTAINER-ID> bash
-
-docker container stop <CONTAINER-ID>
+-- 1. Build the application
+$ ./gradlew clean build
+-- 2. Run all the containers in the same network orchestrated by docker-compose
+$ docker-compose up
