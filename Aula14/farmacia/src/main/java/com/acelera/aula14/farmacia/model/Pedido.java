@@ -1,26 +1,34 @@
 package com.acelera.aula14.farmacia.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pedido")
 public class Pedido {
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long idPedido;
     
-    @Column (name = "data")
-    private String dataPedido;
+    @Column (name = "data", nullable = false)
+    private LocalDateTime dataPedido;
     
     @Column (name = "origem")
     private String origemPedido;
     
     @ManyToMany
-    @JoinTable(name="ordem_compra"
+    @JoinTable(name="item_pedido"
     	,joinColumns={@JoinColumn(name="id_pedido")}
     	,inverseJoinColumns={@JoinColumn(name="id_produto")}
     )
@@ -28,9 +36,9 @@ public class Pedido {
     
     public Long getIdPedido() { return this.idPedido; }
     
-    public void setDataPedido(String dataPedido) { this.dataPedido = dataPedido; }
+    public void setDataPedido(LocalDateTime dataPedido) { this.dataPedido = dataPedido; }
     
-    public String getDataPedido() { return this.dataPedido; }
+    public LocalDateTime getDataPedido() { return this.dataPedido; }
     
     public void setOrigemPedido(String origemPedido) { this.origemPedido = origemPedido; }
     

@@ -3,17 +3,17 @@ package com.acelera.aula14.farmacia.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ordem_compra")
-public class OrdemCompra {
+@Table(name = "item_pedido")
+public class ItemPedido {
     @Id
-    @GeneratedValue(generator = "increment")
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long idOrdemCompra;
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    @Column (name = "id", updatable = false, nullable = false)
+    private Long idItemPedido;
     
     @Column(name = "quantidade")
     private Long quantidade;
     
-    public Long getIdOrdemCompra() { return this.idOrdemCompra; }
+    public Long getIdOrdemCompra() { return this.idItemPedido; }
     
     public void setQuantidade(Long quantidade) { this.quantidade = quantidade; }
     

@@ -1,21 +1,3 @@
--- drop database farmacia;
-
--- show databases;
-
--- create database farmacia;
-
--- use farmacia;
-
--- show tables;
-
--- PEDIDO
-CREATE TABLE pedido (
-  id                       int          NOT NULL AUTO_INCREMENT,
-  data                     varchar(10)  NOT NULL,
-  origem                   varchar(20)  NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- PRODUTO
 CREATE TABLE produto (
   id                       int          NOT NULL AUTO_INCREMENT,
@@ -23,8 +5,16 @@ CREATE TABLE produto (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ORDEM DE COMPRA
-CREATE TABLE ordem_compra (
+-- PEDIDO
+CREATE TABLE pedido (
+  id                       int          NOT NULL AUTO_INCREMENT,
+  data                     datetime     NOT NULL,
+  origem                   varchar(20)  NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ITEM DE PEDIDO
+CREATE TABLE item_pedido (
   id                       int          NOT NULL AUTO_INCREMENT,
   id_pedido                int          NOT NULL,
   id_produto               int          NOT NULL,

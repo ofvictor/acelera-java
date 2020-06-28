@@ -25,38 +25,38 @@
 			"response": []
 		},
 		{
-			"name": "Ordem de Compra Get All",
+			"name": "Item Pedido ALL",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ordem-compra",
+					"raw": "http://localhost:8080/item-pedido",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ordem-compra"
+						"item-pedido"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Ordem de Compra Get By ID",
+			"name": "Item Pedido By ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ordem-compra/7",
+					"raw": "http://localhost:8080/item-pedido/7",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ordem-compra",
+						"item-pedido",
 						"7"
 					]
 				}
