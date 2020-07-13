@@ -26,7 +26,10 @@ where   c.id          = u.id_customer
 $ systemctl status mysql
 $ systemctl stop mysql
 -- Entrar no container do MySQL enquanto a aplicação roda
-$ docker exec -it mysql-server bash
+$ 'docker exec -it mysql-server bash
 $ mysql -p
 mysql> show databases;
 mysql> drop database transaction;
+
+-- Para ajustar data/hora no MySQL
+update transaction_account set transaction_moment = STR_TO_DATE('2020-01-01 00:00:01','%Y-%m-%d %H:%i:%s') where id = 1;

@@ -44,21 +44,10 @@ public class BankOperationService {
 	}
 	
 	public Double getAccountBalance(AccountBalanceRequest accountBalanceRequest) {
-		Optional<CustomerAccount> optionalCustomerAccount = this.customerAccountService.getById(accountBalanceRequest.getSourceAccountId());
-		if (!optionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Account " + accountBalanceRequest.getSourceAccountId() + " not found.");
-		}
+		Optional<TransactionType> optionalTransactionType = this.getTransactionType(accountBalanceRequest.getTransactionTypeId());
+		Optional<TransactionChannel> optionalTransactionChannel = this.getTransactionChannel(accountBalanceRequest.getTransactionChannelId());
 		
-		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(accountBalanceRequest.getTransactionTypeId());
-		if (!optionalTransactionType.isPresent()) {
-			throw new TransactionTypeNotFound("Transaction Type " + accountBalanceRequest.getTransactionTypeId() + " not found.");
-		}
-		
-		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(accountBalanceRequest.getTransactionChannelId());
-		if (!optionalTransactionChannel.isPresent()) {
-			throw new TransactionChannelNotFound("Transaction Channel " + accountBalanceRequest.getTransactionChannelId() + " not found.");
-		}
-		
+		Optional<CustomerAccount> optionalCustomerAccount = this.getCustomerAccount(accountBalanceRequest.getSourceAccountId());
 		CustomerAccount customerAccount = optionalCustomerAccount.get();
 		
 		this.registerTransactionAccount(optionalTransactionType.get(),optionalTransactionChannel.get(),customerAccount,customerAccount.getAccountBalance());
@@ -67,21 +56,10 @@ public class BankOperationService {
 	}
 	
 	public CustomerAccount accountDeposit(AccountDepositRequest accountDepositRequest) {
-		Optional<CustomerAccount> optionalCustomerAccount = this.customerAccountService.getById(accountDepositRequest.getSourceAccountId());
-		if (!optionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Account " + accountDepositRequest.getSourceAccountId() + " not found.");
-		}
+		Optional<TransactionType> optionalTransactionType = this.getTransactionType(accountDepositRequest.getTransactionTypeId());
+		Optional<TransactionChannel> optionalTransactionChannel = this.getTransactionChannel(accountDepositRequest.getTransactionChannelId());
 		
-		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(accountDepositRequest.getTransactionTypeId());
-		if (!optionalTransactionType.isPresent()) {
-			throw new TransactionTypeNotFound("Transaction Type " + accountDepositRequest.getTransactionTypeId() + " not found.");
-		}
-		
-		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(accountDepositRequest.getTransactionChannelId());
-		if (!optionalTransactionChannel.isPresent()) {
-			throw new TransactionChannelNotFound("Transaction Channel " + accountDepositRequest.getTransactionChannelId() + " not found.");
-		}
-		
+		Optional<CustomerAccount> optionalCustomerAccount = this.getCustomerAccount(accountDepositRequest.getSourceAccountId());
 		CustomerAccount customerAccount = optionalCustomerAccount.get();
 		
 		customerAccount.setAccountBalance(customerAccount.getAccountBalance() + accountDepositRequest.getAmountToDeposit());
@@ -93,21 +71,10 @@ public class BankOperationService {
 	}
 	
 	public CustomerAccount accountWithdraw(AccountWithdrawRequest accountWithdrawRequest) {
-		Optional<CustomerAccount> optionalCustomerAccount = this.customerAccountService.getById(accountWithdrawRequest.getSourceAccountId());
-		if (!optionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Account " + accountWithdrawRequest.getSourceAccountId() + " not found.");
-		}
+		Optional<TransactionType> optionalTransactionType = this.getTransactionType(accountWithdrawRequest.getTransactionTypeId());
+		Optional<TransactionChannel> optionalTransactionChannel = this.getTransactionChannel(accountWithdrawRequest.getTransactionChannelId());
 		
-		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(accountWithdrawRequest.getTransactionTypeId());
-		if (!optionalTransactionType.isPresent()) {
-			throw new TransactionTypeNotFound("Transaction Type " + accountWithdrawRequest.getTransactionTypeId() + " not found.");
-		}
-		
-		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(accountWithdrawRequest.getTransactionChannelId());
-		if (!optionalTransactionChannel.isPresent()) {
-			throw new TransactionChannelNotFound("Transaction Channel " + accountWithdrawRequest.getTransactionChannelId() + " not found.");
-		}
-		
+		Optional<CustomerAccount> optionalCustomerAccount = this.getCustomerAccount(accountWithdrawRequest.getSourceAccountId());
 		CustomerAccount customerAccount = optionalCustomerAccount.get();
 		
 		if (customerAccount.getAccountBalance() < accountWithdrawRequest.getAmountToWithdraw()) {
@@ -123,32 +90,18 @@ public class BankOperationService {
 	}
 	
 	public CustomerAccount transferBetweenAccounts(AccountTransferRequest accountTransferRequest) {
-		Optional<CustomerAccount> sourceOptionalCustomerAccount = this.customerAccountService.getById(accountTransferRequest.getSourceAccountId());
-		if (!sourceOptionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Source Account " + accountTransferRequest.getSourceAccountId() + " not found.");
-		}
+		Optional<TransactionType> optionalTransactionType = this.getTransactionType(accountTransferRequest.getTransactionTypeId());
+		Optional<TransactionChannel> optionalTransactionChannel = this.getTransactionChannel(accountTransferRequest.getTransactionChannelId());
 		
-		Optional<CustomerAccount> targetOptionalCustomerAccount = this.customerAccountService.getById(accountTransferRequest.getTargetAccountId());
-		if (!targetOptionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Target Account " + accountTransferRequest.getTargetAccountId() + " not found.");
-		}
-		
-		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(accountTransferRequest.getTransactionTypeId());
-		if (!optionalTransactionType.isPresent()) {
-			throw new TransactionTypeNotFound("Transaction Type " + accountTransferRequest.getTransactionTypeId() + " not found.");
-		}
-		
-		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(accountTransferRequest.getTransactionChannelId());
-		if (!optionalTransactionChannel.isPresent()) {
-			throw new TransactionChannelNotFound("Transaction Channel " + accountTransferRequest.getTransactionChannelId() + " not found.");
-		}
-		
+		Optional<CustomerAccount> sourceOptionalCustomerAccount = this.getCustomerAccount(accountTransferRequest.getSourceAccountId());
 		CustomerAccount sourceCustomerAccount = sourceOptionalCustomerAccount.get();
-		CustomerAccount targetCustomerAccount = targetOptionalCustomerAccount.get();
 		
 		if (sourceCustomerAccount.getAccountBalance() < accountTransferRequest.getAmountToTransfer()) {
 			throw new CustomerAccountInsufficientFundsForWithdraw("Insufficient funds (" + BankOperationService.CURRENCY_FORMAT.format(sourceCustomerAccount.getAccountBalance()) + ") in the Customer Account " + accountTransferRequest.getSourceAccountId() + " for the requested Withdraw (" + BankOperationService.CURRENCY_FORMAT.format(accountTransferRequest.getAmountToTransfer()) + ").");
 		}
+		
+		Optional<CustomerAccount> targetOptionalCustomerAccount = this.getCustomerAccount(accountTransferRequest.getTargetAccountId());
+		CustomerAccount targetCustomerAccount = targetOptionalCustomerAccount.get();
 		
 		sourceCustomerAccount.setAccountBalance(sourceCustomerAccount.getAccountBalance() - accountTransferRequest.getAmountToTransfer());
 		this.customerAccountService.update(sourceCustomerAccount);
@@ -164,21 +117,10 @@ public class BankOperationService {
 	}
 	
 	public List<TransactionAccount> getAccountStatement(AccountStatementRequest accountStatementRequest) {
-		Optional<CustomerAccount> optionalCustomerAccount = this.customerAccountService.getById(accountStatementRequest.getSourceAccountId());
-		if (!optionalCustomerAccount.isPresent()) {
-			throw new CustomerAccountNotFound("Account " + accountStatementRequest.getSourceAccountId() + " not found.");
-		}
+		Optional<TransactionType> optionalTransactionType = this.getTransactionType(accountStatementRequest.getTransactionTypeId());
+		Optional<TransactionChannel> optionalTransactionChannel = this.getTransactionChannel(accountStatementRequest.getTransactionChannelId());
 		
-		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(accountStatementRequest.getTransactionTypeId());
-		if (!optionalTransactionType.isPresent()) {
-			throw new TransactionTypeNotFound("Transaction Type " + accountStatementRequest.getTransactionTypeId() + " not found.");
-		}
-		
-		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(accountStatementRequest.getTransactionChannelId());
-		if (!optionalTransactionChannel.isPresent()) {
-			throw new TransactionChannelNotFound("Transaction Channel " + accountStatementRequest.getTransactionChannelId() + " not found.");
-		}
-		
+		Optional<CustomerAccount> optionalCustomerAccount = this.getCustomerAccount(accountStatementRequest.getSourceAccountId());
 		CustomerAccount customerAccount = optionalCustomerAccount.get();
 		
 		List<TransactionAccount> transactionAccounts = this.transactionAccountService.getForStatement(customerAccount,accountStatementRequest.getAmountOfDays());
@@ -186,6 +128,30 @@ public class BankOperationService {
 		this.registerTransactionAccount(optionalTransactionType.get(),optionalTransactionChannel.get(),customerAccount,customerAccount.getAccountBalance());
 		
 		return transactionAccounts;
+	}
+	
+	private Optional<TransactionType> getTransactionType(Long transactionTypeId) {
+		Optional<TransactionType> optionalTransactionType = this.transactionTypeService.getById(transactionTypeId);
+		if (!optionalTransactionType.isPresent()) {
+			throw new TransactionTypeNotFound("Transaction Type " + transactionTypeId + " not found.");
+		}
+		return optionalTransactionType;
+	}
+	
+	private Optional<TransactionChannel> getTransactionChannel(Long transactionChannelId) {
+		Optional<TransactionChannel> optionalTransactionChannel = this.transactionChannelService.getById(transactionChannelId);
+		if (!optionalTransactionChannel.isPresent()) {
+			throw new TransactionChannelNotFound("Transaction Channel " + transactionChannelId + " not found.");
+		}
+		return optionalTransactionChannel;
+	}
+	
+	private Optional<CustomerAccount> getCustomerAccount(Long customerAccountId) {
+		Optional<CustomerAccount> optionalCustomerAccount = this.customerAccountService.getById(customerAccountId);
+		if (!optionalCustomerAccount.isPresent()) {
+			throw new CustomerAccountNotFound("Account " + customerAccountId + " not found.");
+		}
+		return optionalCustomerAccount;
 	}
 	
 	private void registerTransactionAccount(TransactionType transactionType, TransactionChannel transactionChannel, CustomerAccount customerAccount, Double amount) {
