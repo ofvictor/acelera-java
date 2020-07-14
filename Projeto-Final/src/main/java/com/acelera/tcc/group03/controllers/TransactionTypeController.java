@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acelera.tcc.group03.domains.TransactionType;
+import com.acelera.tcc.group03.dto.TransactionTypeDTO;
 import com.acelera.tcc.group03.services.TransactionTypeService;
 
 @RestController
@@ -39,15 +40,14 @@ public class TransactionTypeController {
     }
     
     @PostMapping
-    public ResponseEntity<TransactionType> create(@RequestBody TransactionType transactionType) {
-    	this.service.create(transactionType);
-        return ResponseEntity.status(HttpStatus.OK).body(transactionType);
+    public ResponseEntity<TransactionType> create(@RequestBody TransactionTypeDTO transactionTypeDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.create(transactionTypeDTO));
     }
     
     @PutMapping
     public ResponseEntity<TransactionType> update(@RequestBody TransactionType transactionType) {
     	this.service.update(transactionType);
-        return ResponseEntity.status(HttpStatus.OK).body(transactionType);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(transactionType);
     }
     
     @DeleteMapping ("/{id}")

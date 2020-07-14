@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.acelera.tcc.group03.domains.TransactionType;
+import com.acelera.tcc.group03.dto.TransactionTypeDTO;
 import com.acelera.tcc.group03.repositories.TransactionTypeRepository;
 
 @Service
@@ -24,8 +25,8 @@ public class TransactionTypeService {
 		return this.repository.findById(id);
 	}
 	
-	public TransactionType create(TransactionType transactionType) {
-		return this.repository.save(transactionType);
+	public TransactionType create(TransactionTypeDTO transactionTypeDTO) {
+		return this.repository.save(transactionTypeDTO.transformDTOToTransactionType());
 	}
 	
 	public TransactionType update(TransactionType transactionType) {

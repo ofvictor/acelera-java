@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acelera.tcc.group03.domains.TransactionChannel;
+import com.acelera.tcc.group03.dto.TransactionChannelDTO;
 import com.acelera.tcc.group03.services.TransactionChannelService;
 
 @RestController
@@ -39,15 +40,14 @@ public class TransactionChannelController {
     }
     
     @PostMapping
-    public ResponseEntity<TransactionChannel> create (@RequestBody TransactionChannel transactionChannel) {
-        this.service.create(transactionChannel);
-        return ResponseEntity.status(HttpStatus.OK).body(transactionChannel);
+    public ResponseEntity<TransactionChannel> create (@RequestBody TransactionChannelDTO transactionChannelDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.create(transactionChannelDTO));
     }
     
     @PutMapping
     public ResponseEntity<TransactionChannel> update(@RequestBody TransactionChannel transactionChannel) {
     	this.service.update(transactionChannel);
-        return ResponseEntity.status(HttpStatus.OK).body(transactionChannel);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(transactionChannel);
     }
     
     @DeleteMapping("/{id}")
